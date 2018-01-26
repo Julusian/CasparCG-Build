@@ -4,8 +4,8 @@ services:
   - docker
 
 env:
-  - PLATFORM=ubuntu-17.10
-#  - ISOLATED=false
+  matrix:
+    - PLATFORM=ubuntu-17.10
 
 before_install:
   - ./clone_linux.sh
