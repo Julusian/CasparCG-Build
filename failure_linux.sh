@@ -8,4 +8,4 @@ curl -XPOST -H 'Accept: application/vnd.github.v3+json' -H 'Authorization: token
   "state": "failure",
   "description": "Failed: The '$PLATFORM' build has failed",
   "context": "travis-custom/'$PLATFORM'"
-}' "https://api.github.com/repos/${ORIG_REPO_NAME}/statuses/${ORIG_COMMIT_ID}"
+}' "https://api.github.com/repos/${ORIG_REPO_NAME}/statuses/${ORIG_COMMIT_ID}" || true

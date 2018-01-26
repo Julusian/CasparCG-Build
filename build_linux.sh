@@ -22,11 +22,11 @@ curl -XPOST -H 'Accept: application/vnd.github.v3+json' -H 'Authorization: token
   "target_url": "https://caspar.julusian.co.uk/'$BUCKET_ID'",
   "description": "Pending: The '$PLATFORM' build is in progress",
   "context": "travis-custom/'$PLATFORM'"
-}' "https://api.github.com/repos/${ORIG_REPO_NAME}/statuses/${ORIG_COMMIT_ID}"
+}' "https://api.github.com/repos/${ORIG_REPO_NAME}/statuses/${ORIG_COMMIT_ID}" || true
 
 
-./build-scripts/$PLATFORM/build-docker-image
-./build-scripts/$PLATFORM/launch-interactive cmake /source && make -j2 && /source/build-scripts/$PLATFORM/package
+"./build-scripts/$PLATFORM/build-docker-image"
+"./build-scripts/$PLATFORM/launch-interactive" cmake /source && make -j2 && "/source/build-scripts/$PLATFORM/package"
 
 # secrets are only defined on non-pr builds, so dont try to upload if it is a pr
 # not relevent via the api hook method though
@@ -47,4 +47,4 @@ curl -XPOST -H 'Accept: application/vnd.github.v3+json' -H 'Authorization: token
   "target_url": "https://caspar.julusian.co.uk/'$BUCKET_ID'",
   "description": "Success: The '$PLATFORM' build is complete",
   "context": "travis-custom/'$PLATFORM'"
-}' "https://api.github.com/repos/${ORIG_REPO_NAME}/statuses/${ORIG_COMMIT_ID}"
+}' "https://api.github.com/repos/${ORIG_REPO_NAME}/statuses/${ORIG_COMMIT_ID}" || true
