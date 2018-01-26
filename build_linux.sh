@@ -25,8 +25,15 @@ curl -XPOST -H 'Accept: application/vnd.github.v3+json' -H 'Authorization: token
 }' "https://api.github.com/repos/${ORIG_REPO_NAME}/statuses/${ORIG_COMMIT_ID}" || true
 
 
+cat >build-scripts/$PLATFORM/inner <<EOL
+cmake /source
+make -j2
+/source/build-scripts/$PLATFORM/package
+EOL
+chmod +x build-scripts/$PLATFORM/inner
+
 "./build-scripts/$PLATFORM/build-docker-image"
-"./build-scripts/$PLATFORM/launch-interactive" cmake /source && make -j2 && "/source/build-scripts/$PLATFORM/package"
+"./build-scripts/$PLATFORM/launch-interactive" "/source/build-scripts/$PLATFORM/inner"
 
 # secrets are only defined on non-pr builds, so dont try to upload if it is a pr
 # not relevent via the api hook method though
