@@ -32,7 +32,7 @@ curl -XPOST -H 'Accept: application/vnd.github.v3+json' -H 'Authorization: token
 # not relevent via the api hook method though
 # if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   COUNT=$(git rev-list --count HEAD)
-  NEW_NAME="CasparCG_Server_${GITHUB_COMMIT_ID}_${COUNT}_${PLATFORM}.tar.gz"
+  NEW_NAME="CasparCG_Server_${ORIG_COMMIT_ID}_${COUNT}_${PLATFORM}.tar.gz"
 
   cd build/products
   mv "CasparCG_Server_${PLATFORM}.tar.gz" "$NEW_NAME"
@@ -47,4 +47,4 @@ curl -XPOST -H 'Accept: application/vnd.github.v3+json' -H 'Authorization: token
   "target_url": "https://caspar.julusian.co.uk/'$BUCKET_ID'",
   "description": "Build complete '$PLATFORM'",
   "context": "travis-custom/'$PLATFORM'"
-}' "https://api.github.com/repos/${ORIG_REPO_NAME}/statuses/${GITHUB_COMMIT_ID}"
+}' "https://api.github.com/repos/${ORIG_REPO_NAME}/statuses/${ORIG_COMMIT_ID}"
