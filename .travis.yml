@@ -1,0 +1,13 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  - PLATFORM=ubuntu-17.10
+#  - ISOLATED=false
+
+before_install:
+  - ./clone_linux.sh
+script:
+  - ./build_linux.sh
