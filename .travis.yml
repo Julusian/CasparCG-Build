@@ -11,3 +11,5 @@ before_install:
   - ./clone_linux.sh
 script:
   - ./build_linux.sh
+after_failure:
+  - ./failure_linux.sh
