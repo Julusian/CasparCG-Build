@@ -25,6 +25,7 @@ curl -XPOST -H 'Accept: application/vnd.github.v3+json' -H 'Authorization: token
 }' "https://api.github.com/repos/${ORIG_REPO_NAME}/statuses/${ORIG_COMMIT_ID}" || true
 
 
+# write the build script for docker, because it 
 cat >build-scripts/$PLATFORM/inner <<EOL
 cmake /source
 make -j2
@@ -33,7 +34,10 @@ EOL
 chmod +x build-scripts/$PLATFORM/inner
 
 "./build-scripts/$PLATFORM/build-docker-image"
-"./build-scripts/$PLATFORM/launch-interactive" "/source/build-scripts/$PLATFORM/inner"
+docker run --rm -it \
+    -v $PWD:/source \
+    -v $PWD/products:/build/products \
+    "casparcg/server-build:$PLATFORM" /bin/bash "/source/build-scripts/$PLATFORM/inner"
 
 # secrets are only defined on non-pr builds, so dont try to upload if it is a pr
 # not relevent via the api hook method though
