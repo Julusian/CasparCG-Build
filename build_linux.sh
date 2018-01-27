@@ -38,7 +38,7 @@ EOL
   sudo chmod 777 "CasparCG_Server_${PLATFORM}.tar.gz"
   sudo mv "CasparCG_Server_${PLATFORM}.tar.gz" "$RESULT_NAME"
 
-elif [ "$PLATFORM" == "linux" ]; then # 2.1.0 build script
+elif [ "$PLATFORM" == "linux" && ! -d "build-scripts/ubuntu-17.10" ]; then # 2.1.0 build script
   # TODO - remove/change the url if it isnt going to be deployed
   curl -XPOST -H 'Accept: application/vnd.github.v3+json' -H 'Authorization: token ${GITHUB_OAUTH}' -d '{
     "state": "pending",
@@ -48,8 +48,11 @@ elif [ "$PLATFORM" == "linux" ]; then # 2.1.0 build script
   }' "https://api.github.com/repos/${ORIG_REPO_NAME}/statuses/${ORIG_COMMIT_ID}" || true
 
   sudo apt-get update
-  sudo apt-get install libsndfile1-dev libxrandr-dev libudev-dev
-  
+  sudo apt-get install libxrandr-dev libjpeg-dev libsndfile1-dev libudev-dev libglu1-mesa-dev
+  sudo apt-get install libv4l-0 libraw1394-11 libavc1394-0 libiec61883-0 libgdk-pixbuf2.0-0 \
+      libxi6 libasound2 libcups2 libatk1.0-0 libpangocairo-1.0-0 libxtst6 libxcomposite1 \
+      libnss3 libgtk2.0-0 libgconf2-4
+
   cd build-scripts
   export BUILD_ARCHIVE_NAME="CasparCG Server"
   export BUILD_PARALLEL_THREADS=4
