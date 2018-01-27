@@ -35,8 +35,8 @@ EOL
 
   cd products
 
-  sudo chmod 777 "CasparCG_Server_${PLATFORM}.tar.gz"
-  sudo mv "CasparCG_Server_${PLATFORM}.tar.gz" "$RESULT_NAME"
+  sudo chmod 777 . -R
+  mv "CasparCG_Server_${PLATFORM}.tar.gz" "$RESULT_NAME"
 
 elif [ "$PLATFORM" == "linux" ] && [ ! -d "build-scripts/ubuntu-17.10" ]; then # 2.1.0 build script
   # TODO - remove/change the url if it isnt going to be deployed
