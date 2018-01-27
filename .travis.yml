@@ -6,6 +6,7 @@ services:
 env:
   matrix:
     - PLATFORM=ubuntu-17.10
+    - PLATFORM=linux
 
 before_install:
   - ./clone_linux.sh
