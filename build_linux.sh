@@ -70,9 +70,11 @@ fi
 # secrets are only defined on non-pr builds, so dont try to upload if it is a pr
 # not relevent via the api hook method though
 # if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
-  mc -C ./ config host add minio $S3_URL $S3_ACCESS_KEY $S3_SECRET_KEY S3v4
-  mc -C ./ mb minio/$BUCKET_ID
-  mc -C ./ cp "$RESULT_NAME" minio/$BUCKET_ID
+  sudo wget https://dl.minio.io/client/mc/release/linux-amd64/mc
+  sudo chmod +x mc
+  ./mc -C ./ config host add minio $S3_URL $S3_ACCESS_KEY $S3_SECRET_KEY S3v4
+  ./mc -C ./ mb minio/$BUCKET_ID
+  ./mc -C ./ cp "$RESULT_NAME" minio/$BUCKET_ID
 # fi
 
 # TODO - remove/change the url if it isnt going to be deployed
