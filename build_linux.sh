@@ -45,6 +45,9 @@ elif [ "$PLATFORM" == "linux" ]; then # 2.1.0 build script
     "description": "Pending: The '$PLATFORM' build is in progress",
     "context": "travis-custom/'$PLATFORM'"
   }' "https://api.github.com/repos/${ORIG_REPO_NAME}/statuses/${ORIG_COMMIT_ID}" || true
+
+  sudo apt-get update
+  sudo apt-get install libsndfile1-dev libxrandr-dev libudev-dev
   
   cd build-scripts
   export BUILD_ARCHIVE_NAME="CasparCG Server"
