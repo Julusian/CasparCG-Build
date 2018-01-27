@@ -36,7 +36,7 @@ EOL
   cd products
 
   sudo chmod 777 "CasparCG_Server_${PLATFORM}.tar.gz"
-  mv "CasparCG_Server_${PLATFORM}.tar.gz" "$RESULT_NAME"
+  sudo mv "CasparCG_Server_${PLATFORM}.tar.gz" "$RESULT_NAME"
 
 elif [ "$PLATFORM" == "linux" ]; then # 2.1.0 build script
   # TODO - remove/change the url if it isnt going to be deployed
