@@ -33,7 +33,7 @@ EOL
       "casparcg/server-build:$PLATFORM" /bin/bash "/source/build-scripts/$PLATFORM/inner"
 
 
-  cd build/products
+  cd products
 
   mv "CasparCG_Server_${PLATFORM}.tar.gz" "$RESULT_NAME"
 
